@@ -28,9 +28,12 @@ function createHTML(data){
   let time = THEdate()
   let html = fs.readFileSync('./views/template.html', 'utf-8',err => console.error(err))
   let title = data.name || 'Untitled paste'
+  let mainData = data.main
+  mainData = mainData.replace( /</g, '&lt')
+  mainData = mainData.replace(/>/g, '&gt')
   html = html.replace('replace_title', title)
   html = html.replace('replace_time', time)
-  html = html.replace('replace_main', data.main)
+  html = html.replace('replace_main', mainData)
   let fileName = sha1(data.main)
   fs.writeFileSync('./public/texts/' + fileName +'.html', html)
   return fileName
