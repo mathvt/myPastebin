@@ -15,8 +15,7 @@ app.use(express.json())
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'views')));
-app.use(express.static(path.join(__dirname, 'public/texts')));
-//app.set('view engine', 'ejs');
+app.set('view engine', 'ejs');
 
 
 app.use('/', indexRouter);

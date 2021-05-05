@@ -1,42 +1,56 @@
 let express = require('express');
 let router = express.Router();
-let fs = require('fs')
 const crypto = require('crypto');
-const { send } = require('process');
+const { insertPost, searchInDb } = require('../sql/test')
 
 
-router.get('/:id', function(req, res) {
-  res.sendFile('C:/Users/mathieu/Desktop/project/pastebin/public/texts/' + req.originalUrl + '.html');
+
+router.get('/', function(req, res) {
+  res.render('index')
 });
 
 
 router.post('/', function(req, res) {
-  let data = req.body
-  console.log(data)
-  fileName = createHTML(data);
-  res.send(fileName)
+  const data = req.body
+  if (!data.main){
+    res.send('0')
+  }
+  else{
+    console.log(data)
+    dataPreprocess(data);
+    insertPost(data)
+    res.send(data.hash)    
+  }
 });
 
+
+router.get('/:id', function(req, res) {
+  let newUrl = req.originalUrl.replace('/', '')
+  console.log(newUrl)
+  searchInDb(newUrl, (row) => {
+      row && res.render('template', {row})
+      !row && res.sendStatus(404)
+  })
+});
 
 
 module.exports = router
 
 
+function dataPreprocess(data){
+  data.time = THEdate()
+  data.expiration = expirationNumber(data.expiration);
+  data.hash = sha1(data.main)
+  data.name = data.name || 'Untitled paste'
+}
 
 
-function createHTML(data){
-  let time = THEdate()
-  let html = fs.readFileSync('./views/template.html', 'utf-8',err => console.error(err))
-  let title = data.name || 'Untitled paste'
-  let mainData = data.main
-  mainData = mainData.replace( /</g, '&lt')
-  mainData = mainData.replace(/>/g, '&gt')
-  html = html.replace('replace_title', title)
-  html = html.replace('replace_time', time)
-  html = html.replace('replace_main', mainData)
-  let fileName = sha1(data.main)
-  fs.writeFileSync('./public/texts/' + fileName +'.html', html)
-  return fileName
+function expirationNumber(expiration){
+  return expiration //TODO
+}
+
+function controlExpiration(){
+  //TODO
 }
 
 

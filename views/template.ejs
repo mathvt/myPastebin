@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="stylesheets/styles.css" rel="stylesheet">
 
-        <title>replace_title</title>
+        <title><%= row.name %></title>
 
     </head>
 
@@ -16,8 +16,10 @@
             <h1><a href="/">PASTEBIN</a></h1>
             <a href="#">all pastes</a>
         </header>
-        <p>replace_time</p>
-        <div id="mainSaved">replace_main</div>
+        <p><%= row.time %></p>
+        <div id="mainSaved"><%= row.content %></div>
+
+    <button onclick="copy()" >Copy text</button>
 
         <script src='javascripts/script.js'></script>
     </body>
