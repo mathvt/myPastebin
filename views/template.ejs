@@ -1,25 +1,17 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    <head>
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link href="stylesheets/styles.css" rel="stylesheet">
-
-        <title><%= row.name %></title>
-
-    </head>
+<%- include('part/head') %>
 
     <body>
-        <header>
-            <h1><a href="/">PASTEBIN</a></h1>
-            <a href="#">all pastes</a>
-        </header>
+        <%- include('part/header') %>
+
+        <div class="mainBody"></div>
         <p><%= row.time %></p>
         <div id="mainSaved"><%= row.content %></div>
 
-    <button onclick="copy()" >Copy text</button>
+    <button class="copy" onclick="copy()" >Copy text</button>
 
         <script src='javascripts/script.js'></script>
     </body>

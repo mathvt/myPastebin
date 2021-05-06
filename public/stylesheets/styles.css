@@ -4,7 +4,7 @@ body{
     margin: 0px;
 }
 
-#mainBody{
+.mainBody{
     margin: 20px;
 }
 
@@ -20,12 +20,12 @@ h1{
     margin: auto;
 }
 
-header > h1 > a{
+.homeLink{
     color: black;
     text-decoration: none;
 }
 
-header > a{
+.allPastesLink{
     position: absolute;
     float: right;
     top: auto;
@@ -34,7 +34,9 @@ header > a{
 
 
 
-/* MAIN */
+
+
+/* index */
 hr{
     margin-top: 15px;
     margin-bottom: 15px;
@@ -62,7 +64,7 @@ hr{
     padding: 15px;
 }
 
-div > label{
+.labelCol{
     margin-right: 30px;
     margin-bottom: 8px;
 }
@@ -82,9 +84,39 @@ select.info{
 
 
 
-/* save html */
+
+/* template html */
 #mainSaved{
     white-space: pre-line;
     background-color: #EEEEEE;
     padding: 10px;
+}
+
+.copy{
+    margin-top: 15px;
+    padding: 5px;
+    font-size: inherit;
+}
+
+
+
+
+
+/* list */
+.listElemt{
+    display: flex;
+    justify-content: center;
+    color: unset;
+    background-color: rgb(232, 249, 255);
+}
+
+.listElemt:hover{
+    cursor: pointer;
+    background-color: #BBDEEE;
+}
+
+.li{
+    width: 33%;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }

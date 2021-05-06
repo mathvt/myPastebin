@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<%- include('part/head') %>
+
+<body>
+    <%- include('part/header') %>
+
+    <div class="mainBody flex-col" id="pastesList">
+        <% list.forEach(function(paste){ %>
+            <a class="listElemt" href=/<%= paste.hash %>>
+                <p class="li"><%= paste.name %></p>
+                <p class="li"><%= paste.syntax %></p>
+                <p class="li"><%= paste.time %></p>
+        </a>
+        <% }); %>
+    </div>
+
+    <script src='javascripts/listScript.js'></script>
+</body>
+
+</html>

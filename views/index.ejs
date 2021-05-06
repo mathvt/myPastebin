@@ -2,33 +2,21 @@
 
 <html lang="en">
 
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="stylesheets/styles.css" rel="stylesheet">
-
-    <title>pastebin</title>
-
-</head>
-
-
+<%- include('part/head') %>
 
 <body>
-    <header>
-        <h1><a href="/">PASTEBIN</a></h1>
-        <a href="#">all pastes</a>
-    </header>
 
-    <div id="mainBody">
+    <%- include('part/header') %>
+
+    <div class="mainBody">
         <p>New Paste</p>
         <textarea name="main" id="main" class="main" placeholder=""></textarea>
         <hr>
         <div id="infoContainer">
             <div class="flex-col">
-                <label for="syntax">syntax :</label>
-                <label for="expiration">expiration :</label>
-                <label for="name">name :</label>
+                <label class="labelCol" for="syntax">syntax :</label>
+                <label class="labelCol" for="expiration">expiration :</label>
+                <label class="labelCol" for="name">name :</label>
             </div>
             <div class="flex-col">
                 <select name="syntax" id="syntax" class="info">
