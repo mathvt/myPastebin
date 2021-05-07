@@ -1,7 +1,6 @@
 const express = require('express')
 const path = require('path')
 const logger = require('morgan')
-const http = require('http')
 
 
 let indexRouter = require('./routes/index')
