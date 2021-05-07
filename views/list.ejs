@@ -9,7 +9,7 @@
 
     <div class="mainBody flex-col" id="pastesList">
         <% list.forEach(function(paste){ %>
-            <a class="listElemt" href=/<%= paste.hash %>>
+            <a target="_blank" class="listElemt" href='/<%= paste.hash %>'>
                 <p class="li"><%= paste.name %></p>
                 <p class="li"><%= paste.syntax %></p>
                 <p class="li"><%= paste.time %></p>
