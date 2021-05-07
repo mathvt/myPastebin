@@ -56,18 +56,20 @@ hr{
     margin-bottom: 5px;
 }
 
-.main{
+#main{
     font-size: inherit;
     width: 50vw;
     height: 40vh;
-    background-color: #EEEEEE;
+    background-color: #F0F0F0;
     padding: 15px;
 }
+
 
 .labelCol{
     margin-right: 30px;
     margin-bottom: 8px;
 }
+
 .info{
     height: 21px;
     margin-bottom: 8px;
@@ -108,6 +110,7 @@ select.info{
     justify-content: center;
     color: unset;
     background-color: rgb(232, 249, 255);
+    text-decoration: none;
 }
 
 .listElemt:hover{

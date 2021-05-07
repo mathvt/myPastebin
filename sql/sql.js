@@ -1,12 +1,21 @@
 const sqlite3 = require('sqlite3')
 const { open } = require('sqlite')
 
-createTable().catch(err => console.log(err));
+start()
+
+
+async function start(){
+    await createTable().catch(err => console.log(err))
+    controlExpiration()
+    setInterval(() => {
+        controlExpiration()
+    }, 24*3600*1000);
+}
 
 
 async function listPast(){
     let db = await openDb()
-    return await db.all('SELECT hash, name, syntax, time FROM pasteTable')
+    return await db.all('SELECT hash, name, syntax, time, timeOfExpiration FROM pasteTable')
 }
 
 
@@ -21,14 +30,15 @@ async function searchPaste(hash){
 
 async function insertPaste(data){
     let db = await openDb()
-        await db.run('INSERT INTO pasteTable (hash, name, content, syntax, time , expiration) VALUES (:hash, :name, :content, :syntax, :time , :expiration)'
+        await db.run('INSERT INTO pasteTable (hash, name, content, syntax, time , expiration, timeOfExpiration) VALUES (:hash, :name, :content, :syntax, :time , :expiration, :timeOfExpiration)'
         ,{
             ':hash': data.hash,
             ':name': data.name,
             ':content': data.main,
             ':syntax': data.syntax,
             ':time': data.time ,
-            ':expiration': data.expiration
+            ':expiration': data.expiration,
+            ':timeOfExpiration': data.timeOfExpiration
         }
     )
     console.log(data)
@@ -37,12 +47,15 @@ async function insertPaste(data){
 module.exports = {searchPaste, insertPaste, listPast}
 
 
-// Create table
+
+
 async function createTable(){
     let db = await openDb()
-    await db.exec('CREATE TABLE IF NOT EXISTS pasteTable (hash text, name varchar(100), content varchar(10000), syntax text, time text, expiration int, UNIQUE(hash))')
-    // pasteTable (hash, name, content, syntax, time , expiration)
+    await db.exec('CREATE TABLE IF NOT EXISTS pasteTable (hash text, name varchar(100), content varchar(10000), syntax text, time text, expiration int, timeOfExpiration int, UNIQUE(hash))')
+    // pasteTable (hash, name, content, syntax, time , expiration, timeOfExpiration)
 }
+
+
 
 async function openDb(){
     const db = await open({
@@ -53,5 +66,8 @@ async function openDb(){
 }
 
 
-
-
+async function controlExpiration(){
+    let db = await openDb()
+    let time = Date.now()
+    await db.all('DELETE FROM pasteTable WHERE timeOfExpiration BETWEEN 1 AND ?', [time])
+}

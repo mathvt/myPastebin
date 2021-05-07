@@ -29,7 +29,7 @@ router.post('/', async function(req, res) {
 router.get('/:id', async function(req, res) {
   let hash = req.originalUrl.replace('/', '')
   let row = await searchPaste(hash)
-  if(row){
+  if(row && (row.timeOfExpiration > Date.now()) || row.timeOfExpiration === 0){
     res.render('template', {row, title: row.name})
   }
   else{
@@ -43,18 +43,29 @@ module.exports = router
 
 async function dataPreprocess(data){
   data.time = THEdate()
-  data.expiration = expirationNumber(data.expiration);
   data.hash = sha1(data.main + data.name)
   data.name = data.name || 'Untitled paste'
+  data.expiration_in_millisec = convert_in_millisec(data.expiration)
+  data.timeOfExpiration = 
+    data.expiration_in_millisec === null ? 0 : data.expiration_in_millisec + Date.now()
 }
 
 
-function expirationNumber(expiration){
-  return expiration //TODO
-}
-
-function controlExpiration(){
-  //TODO
+function convert_in_millisec(expiration){
+  switch(expiration){
+      case 'never':
+          return null
+      case '5 minutes':
+          return 5*60*1000
+      case '1 hour':
+          return 3600*1000
+      case '1 day':
+          return 24*3600*1000
+      case '1 month':
+          return 30.5*24*3600*1000
+      case '1 year':
+          return 365*24*3600*1000
+  }
 }
 
 

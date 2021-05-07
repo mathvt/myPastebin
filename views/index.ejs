@@ -4,27 +4,38 @@
 
 <%- include('part/head') %>
 
+<link rel="stylesheet"
+      href="highlight/styles/default.css">
+<script src="highlight/highlight.pack.js"></script>
+
+
 <body>
 
     <%- include('part/header') %>
 
     <div class="mainBody">
         <p>New Paste</p>
-        <textarea name="main" id="main" class="main" placeholder=""></textarea>
+
+            <textarea name="main" id="main" class="main hljs" placeholder=""></textarea>        
+
         <hr>
+
         <div id="infoContainer">
+
             <div class="flex-col">
                 <label class="labelCol" for="syntax">syntax :</label>
                 <label class="labelCol" for="expiration">expiration :</label>
                 <label class="labelCol" for="name">name :</label>
             </div>
+
             <div class="flex-col">
                 <select name="syntax" id="syntax" class="info">
                     <option value="C">C</option>
                     <option value="Java">Java</option>
-                    <option value="Javascripts">Javascripts</option>
+                    <option value="Javascripts">JavaScript</option>
                     <option value="Python">Python</option>
                 </select>
+
                 <select name="expiration" id="expiration" class="info">
                     <option value="never">never</option>
                     <option value="5 minutes">5 minutes</option>
@@ -33,6 +44,7 @@
                     <option value="1 month">1 month</option>
                     <option value="1 year">1 year</option>
                 </select>
+
                 <input type="text" id="name" name="name" class="info">
             </div>
 
@@ -41,7 +53,7 @@
         <button onclick="sendRequest()">Save</button>        
     </div>
 
-
+    <script>hljs.highlightAll();</script>
     <script src='javascripts/script.js'></script>
 </body>
 

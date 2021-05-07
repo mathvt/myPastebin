@@ -3,16 +3,21 @@
 <html lang="en">
 
 <%- include('part/head') %>
+<link rel="stylesheet"
+      href="highlight/styles/default.css">
+<script src="highlight/highlight.pack.js"></script>
 
     <body>
         <%- include('part/header') %>
 
         <div class="mainBody"></div>
         <p><%= row.time %></p>
-        <div id="mainSaved"><%= row.content %></div>
+        
+        <div id="mainSaved"><pre><code class="<%= row.syntax %>"><%= row.content %></code></pre></div>
 
-    <button class="copy" onclick="copy()" >Copy text</button>
+        <button class="copy" onclick="copy()" >Copy text</button>
 
+        <script>hljs.highlightAll();</script>
         <script src='javascripts/script.js'></script>
     </body>
 
