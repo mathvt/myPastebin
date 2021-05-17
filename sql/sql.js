@@ -6,7 +6,7 @@ start()
 
 async function start(){
     await createTable().catch(err => console.log(err))
-    controlExpiration()
+    await controlExpiration()
     setInterval(() => {
         controlExpiration()
     }, 24*3600*1000);
@@ -15,7 +15,7 @@ async function start(){
 
 async function listPast(){
     let db = await openDb()
-    return await db.all('SELECT hash, name, syntax, time, timeOfExpiration FROM pasteTable')
+    return db.all('SELECT hash, name, syntax, time, timeOfExpiration FROM pasteTable')
 }
 
 

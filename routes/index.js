@@ -29,7 +29,7 @@ router.post('/', async function(req, res) {
 router.get('/:id', async function(req, res) {
   let hash = req.originalUrl.replace('/', '')
   let row = await searchPaste(hash)
-  if(row && (row.timeOfExpiration > Date.now()) || row.timeOfExpiration === 0){
+  if(await row && (await row.timeOfExpiration > Date.now()) || await row.timeOfExpiration === 0){
     res.render('template', {row, title: row.name})
   }
   else{
