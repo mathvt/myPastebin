@@ -10,7 +10,7 @@ body{
 
 /* HEADER */
 header{
-    background-color: lightgrey;
+    background-color: rgb(63, 128, 248);
     position: relative;
     display: flex;
     align-items: center;
@@ -21,7 +21,8 @@ h1{
 }
 
 .homeLink{
-    color: black;
+    font-size: .9em;
+    color: white;
     text-decoration: none;
 }
 
@@ -29,7 +30,16 @@ h1{
     position: absolute;
     float: right;
     top: auto;
-    right: 20px;
+    right: 5%;
+    color: white;
+    text-decoration: none;
+    border: solid white 1px;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.allPastesLink:hover{
+    background-color: rgb(34, 111, 255);
 }
 
 
@@ -56,12 +66,20 @@ hr{
     margin-bottom: 5px;
 }
 
+
 #main{
-    font-size: inherit;
-    width: 50vw;
+    font-size: 15px;
+    width: 70vw;
     height: 40vh;
     background-color: #F0F0F0;
-    padding: 15px;
+    padding: 10px;
+    border: solid #ff8787 2px;
+    border-radius: 5px;
+    outline: none;
+}
+
+#main:focus{
+    border: solid #aeff95 2px;
 }
 
 
@@ -90,7 +108,6 @@ select.info{
 /* template html */
 #mainSaved{
     white-space: pre-line;
-    background-color: #EEEEEE;
     padding: 10px;
 }
 
@@ -122,4 +139,8 @@ select.info{
     width: 33%;
     margin-bottom: 5px;
     margin-top: 5px;
+}
+
+.CodeMirror{
+    height: max-content !important;
 }

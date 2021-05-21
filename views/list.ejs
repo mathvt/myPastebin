@@ -7,6 +7,7 @@
 <body>
     <%- include('part/header') %>
 
+    <% if (list[1]) { %>
     <div class="mainBody flex-col" id="pastesList">
         <% list.forEach(function(paste){ %>
             <a target="_blank" class="listElemt" href='/<%= paste.hash %>'>
@@ -15,8 +16,11 @@
                 <p class="li"><%= paste.time %></p>
         </a>
         <% }); %>
+    <% } else { %>
+    <p>empty</p>
+    <% }; %>
     </div>
->
+    
 </body>
 
 </html>

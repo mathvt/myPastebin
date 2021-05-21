@@ -1,16 +1,13 @@
 let express = require('express');
 let router = express.Router();
-const { listPast } = require('../sql/sql')
+const { listPaste } = require('../sql/sql')
 
 
 
 router.get('/', async function(req, res) {
-  let list = await listPast()
-  if (list.length === 0) {
-    list[1] = { name: 'empty' }
-  }
+  let list = await listPaste()
   let time = Date.now()
-  list = list.filter((row) => row.timeOfExpiration > time || row.timeOfExpiration === 0)
+  list = list.filter((row) => row.timeOfExpiration > time || row.timeOfExpiration === null)
   res.render('list', {list, title: 'list'})
   })
 

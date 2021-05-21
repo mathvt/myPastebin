@@ -4,6 +4,12 @@
 
 <%- include('part/head') %>
 
+<script src="lib/codemirror.js"></script>
+<link rel="stylesheet" href="lib/codemirror.css">
+<script src="mode/clike/clike.js"></script>
+<script src="mode/javascript/javascript.js"></script>
+<script src="mode/python/python.js"></script>
+
 <body>
 
     <%- include('part/header') %>
@@ -11,7 +17,7 @@
     <div class="mainBody">
         <p>New Paste</p>
 
-            <textarea name="main" id="main" class="main hljs" placeholder=""></textarea>        
+        <textarea name="main" id="main" class="main hljs" placeholder=""></textarea> 
 
         <hr>
 
@@ -27,7 +33,7 @@
                 <select name="syntax" id="syntax" class="info">
                     <option value="C">C</option>
                     <option value="Java">Java</option>
-                    <option value="Javascripts">JavaScript</option>
+                    <option value="Javascript">Javascript</option>
                     <option value="Python">Python</option>
                 </select>
 
@@ -49,6 +55,7 @@
     </div>
 
     <script src='javascripts/script.js'></script>
+    
 </body>
 
 </html>

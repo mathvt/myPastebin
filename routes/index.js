@@ -29,7 +29,7 @@ router.post('/', async function(req, res) {
 router.get('/:id', async function(req, res) {
   let hash = req.originalUrl.replace('/', '')
   let row = await searchPaste(hash)
-  if(await row && (await row.timeOfExpiration > Date.now()) || await row.timeOfExpiration === 0){
+  if(await row && (row.timeOfExpiration > Date.now() || row.timeOfExpiration === null)){
     res.render('template', {row, title: row.name})
   }
   else{
@@ -47,14 +47,14 @@ async function dataPreprocess(data){
   data.name = data.name || 'Untitled paste'
   data.expiration_in_millisec = convert_in_millisec(data.expiration)
   data.timeOfExpiration = 
-    data.expiration_in_millisec === null ? 0 : data.expiration_in_millisec + Date.now()
+    data.expiration_in_millisec === 0 ? null : data.expiration_in_millisec + Date.now()
 }
 
 
 function convert_in_millisec(expiration){
   switch(expiration){
       case 'never':
-          return null
+          return 0
       case '5 minutes':
           return 5*60*1000
       case '1 hour':

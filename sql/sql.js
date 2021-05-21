@@ -6,16 +6,16 @@ start()
 
 async function start(){
     await createTable().catch(err => console.log(err))
-    await controlExpiration()
     setInterval(() => {
         controlExpiration()
-    }, 24*3600*1000);
+    }, 3600*1000);
 }
 
 
-async function listPast(){
+async function listPaste(){
     let db = await openDb()
-    return db.all('SELECT hash, name, syntax, time, timeOfExpiration FROM pasteTable')
+    let row = await db.all('SELECT hash, name, syntax, time, timeOfExpiration FROM pasteTable')
+    return row
 }
 
 
@@ -44,7 +44,7 @@ async function insertPaste(data){
     console.log(data)
 }
 
-module.exports = {searchPaste, insertPaste, listPast}
+module.exports = {searchPaste, insertPaste, listPaste}
 
 
 
@@ -53,6 +53,7 @@ async function createTable(){
     let db = await openDb()
     await db.exec('CREATE TABLE IF NOT EXISTS pasteTable (hash text, name varchar(100), content varchar(10000), syntax text, time text, expiration int, timeOfExpiration int, UNIQUE(hash))')
     // pasteTable (hash, name, content, syntax, time , expiration, timeOfExpiration)
+    await controlExpiration()
 }
 
 
@@ -69,5 +70,5 @@ async function openDb(){
 async function controlExpiration(){
     let db = await openDb()
     let time = Date.now()
-    await db.all('DELETE FROM pasteTable WHERE timeOfExpiration BETWEEN 1 AND ?', [time])
+    await db.all('DELETE FROM pasteTable WHERE timeOfExpiration <= ?', [time])
 }
