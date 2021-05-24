@@ -13,11 +13,10 @@
     <body>
     <%- include('part/header') %>
     <div class="mainBody">
-        <div class="mainBody"></div>
         <p><%= row.time %></p>
             
         <hr>
-        <div id="mainSaved"><pre><code id="language" class="<%= row.syntax %>"><%= row.content %></code></pre></div>
+        <div id="mainSaved"><pre></pre><code id="language" class="<%= row.syntax %>"><%= row.content %></code></pre></div>
         <hr>
 
         <button class="copy" onclick="copy()" >Copy text</button>            
